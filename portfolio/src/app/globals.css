@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 250 250 252;
+  --surface: 255 255 255;
+  --ink: 15 23 42;
+  --muted: 71 85 105;
+  --line: 226 232 240;
+  --brand: 67 56 202; /* #4338ca — same indigo as the original site's theme colour */
+  --brand-ink: 255 255 255;
+  --brand-soft: 238 242 255;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 9 12 22;
+    --surface: 16 22 36;
+    --ink: 241 245 249;
+    --muted: 148 163 184;
+    --line: 34 44 64;
+    --brand: 129 140 248;
+    --brand-ink: 15 23 42;
+    --brand-soft: 30 32 78;
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    @apply tracking-tight;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+    outline-style: solid;
+  }
+  ::selection {
+    background: rgb(var(--brand) / 0.25);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-brand-ink hover:opacity-90;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink hover:border-brand hover:text-brand;
+  }
+  .tag {
+    @apply inline-flex items-center rounded-md border border-line bg-bg px-2.5 py-1 text-xs font-medium text-muted;
+  }
+  .tag-core {
+    @apply inline-flex items-center rounded-md border border-brand/30 bg-brand-soft px-2.5 py-1 text-xs font-semibold text-brand;
+  }
+  .link {
+    @apply font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand;
+  }
+}
