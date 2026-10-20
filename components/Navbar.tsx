@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { navigation } from "@/content/navigation";
@@ -20,6 +21,21 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // On phones the browser can drop a plain "#section" jump while the menu is closing.
+  // So: close the menu, wait for its animation, then scroll to the section ourselves.
+  function goTo(e: MouseEvent<HTMLAnchorElement>, href: string) {
+    e.preventDefault();
+    setOpen(false);
+    window.setTimeout(() => {
+      const el = document.querySelector<HTMLElement>(href);
+      if (!el) return;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const top = el.getBoundingClientRect().top + window.scrollY - 72; // 72px = fixed header height
+      window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+      window.history.replaceState(null, "", href);
+    }, 350);
+  }
 
   return (
     <header
@@ -81,7 +97,7 @@ export function Navbar() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => goTo(e, item.href)}
                     className="block rounded-lg px-2 py-2.5 text-sm text-foreground/80 hover:bg-surface hover:text-foreground"
                   >
                     {item.label}
