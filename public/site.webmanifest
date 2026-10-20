@@ -1,0 +1,11 @@
+{
+  "name": "Muhammad Asir Hossain Chowdhury — Portfolio",
+  "short_name": "Asir Hossain",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ],
+  "theme_color": "#4338ca",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
