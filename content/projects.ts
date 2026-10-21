@@ -201,6 +201,7 @@ export const projects: Project[] = [
       "Responsive corporate website deployed on Vercel, with a modern, user-friendly UI focused on clarity, usability and cross-device performance.",
     category: "Web Development",
     technologies: ["Next.js", "Tailwind CSS", "Vercel"],
+    live: "https://hvac-global.vercel.app/",
     tags: ["Corporate", "Responsive design"],
   },
   {
