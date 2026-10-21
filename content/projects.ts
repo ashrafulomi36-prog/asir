@@ -185,6 +185,7 @@ export const projects: Project[] = [
     resultsNote:
       "Output quality depends on the model and the image; no evaluation metrics have been measured.",
     github: `${GH}/Streamlit_Gemini_Project`,
+    live: "https://my-project1.streamlit.app/"
   },
   {
     title: "HarvestGuard: AI-Powered Agricultural Platform",
